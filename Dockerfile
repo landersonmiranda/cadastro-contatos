@@ -1,5 +1,4 @@
 # Expor as portas que o contêiner usará
-EXPOSE 8080
 EXPOSE 8081
 
 # Estágio base com a imagem do ASP.NET
