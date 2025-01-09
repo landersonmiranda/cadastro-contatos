@@ -1,4 +1,5 @@
 # Expor as portas que o contêiner usará
+EXPOSE 8080
 EXPOSE 8081
 
 # Estágio base com a imagem do ASP.NET
@@ -15,7 +16,7 @@ COPY ["PrimeiraCrudMVC.csproj", "./"]
 RUN dotnet restore "./PrimeiraCrudMVC.csproj"
 
 # Copiar o restante dos arquivos e construir o projeto
-COPY . . 
+COPY .
 RUN dotnet build "./PrimeiraCrudMVC.csproj" -c ${BUILD_CONFIGURATION} -o /app/build
 
 # Estágio de publicação
