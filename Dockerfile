@@ -1,11 +1,9 @@
-
-
-# Estágio base com a imagem do ASP.NET
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-nanoserver-1809 AS base
+# Estágio base com a imagem do ASP.NET (Linux)
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-buster-slim AS base
 WORKDIR /app
 
-# Estágio de build com o SDK .NET
-FROM mcr.microsoft.com/dotnet/sdk:8.0-nanoserver-1809 AS build
+# Estágio de build com o SDK .NET (Linux)
+FROM mcr.microsoft.com/dotnet/sdk:8.0-buster-slim AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
@@ -15,13 +13,13 @@ RUN dotnet restore "./PrimeiraCrudMVC.csproj"
 
 # Copiar o restante dos arquivos e construir o projeto
 COPY . .
-RUN dotnet build "./PrimeiraCrudMVC.csproj" -c ${BUILD_CONFIGURATION} -o /app/build
+RUN dotnet build "./PrimeiraCrudMVC.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Estágio de publicação
 FROM build AS publish
 RUN dotnet publish "./PrimeiraCrudMVC.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-# Estágio final com a imagem base para execução
+# Estágio final com a imagem base para execução (Linux)
 FROM base AS final
 WORKDIR /app
 
