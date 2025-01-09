@@ -1,9 +1,9 @@
 # Estágio base com a imagem do ASP.NET (Linux)
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-buster-slim AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 
 # Estágio de build com o SDK .NET (Linux)
-FROM mcr.microsoft.com/dotnet/sdk:8.0-buster-slim AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
