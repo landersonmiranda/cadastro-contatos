@@ -1,6 +1,4 @@
-# Expor as portas que o contêiner usará
-EXPOSE 8080
-EXPOSE 8081
+
 
 # Estágio base com a imagem do ASP.NET
 FROM mcr.microsoft.com/dotnet/aspnet:8.0-nanoserver-1809 AS base
@@ -26,6 +24,10 @@ RUN dotnet publish "./PrimeiraCrudMVC.csproj" -c $BUILD_CONFIGURATION -o /app/pu
 # Estágio final com a imagem base para execução
 FROM base AS final
 WORKDIR /app
+
+# Expor as portas que o contêiner usará
+EXPOSE 8080
+EXPOSE 8081
 
 # Copiar os arquivos publicados do estágio anterior
 COPY --from=publish /app/publish .
